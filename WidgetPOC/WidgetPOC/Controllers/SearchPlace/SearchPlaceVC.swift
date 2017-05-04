@@ -9,15 +9,26 @@ import GoogleMaps
 import GooglePlaces
 import MapKit
 
+//Selected place id
+var selectedPlaceId: String {
+    get {
+        return SearchPlaceVC.selectedPlaceId
+    }
+    set(value) {
+        SearchPlaceVC.selectedPlaceId = value
+    }
+}
+
 class SearchPlaceVC: UIViewController {
     
     @IBOutlet weak var searchBarLocationName: UISearchBar!
-    
     @IBOutlet weak var tableViewSearchResults: UITableView!
     
     var noOfRows = 1
     var arrayCityResults = [String]()
+    var arrayCitiesPlaceId = [String]()
     var lastLocation: CLLocation?
+    static var selectedPlaceId = ""
     
     let ESTIMATED_ROW_HEIGHT: CGFloat = 100
     let locationManager = CLLocationManager()
@@ -41,17 +52,21 @@ class SearchPlaceVC: UIViewController {
         locationManager.requestLocation()
     }
     
+    /// Initial ui setup
     func initialUISetup() {
         tableViewSearchResults.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
         tableViewSearchResults.delegate = self
         tableViewSearchResults.dataSource = self
     }
     
-    func reloadDataWithArray(array: [String]) {
+    /// Reloads tableview
+    ///
+    /// - Parameter array: array of cities
+    func reloadDataWithArray(array: [String],arrayPlaceIds: [String]) {
+        arrayCitiesPlaceId = arrayPlaceIds
         arrayCityResults = array
         tableViewSearchResults.reloadData()
     }
-    
 }
 
 extension SearchPlaceVC: UITableViewDelegate, UITableViewDataSource {
@@ -73,10 +88,17 @@ extension SearchPlaceVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! SearchPlaceTableViewCell
-        let selectedCity = cell.labelCity.text
-        print(selectedCity)
+
+        SearchPlaceVC.selectedPlaceId = arrayCitiesPlaceId[indexPath.row]
+        
+        self.dismiss(animated: false, completion: nil)
     }
     
+    /// Setups the tableview of search table
+    ///
+    /// - Parameters:
+    ///   - searchPlaceTableViewCell: search place tableview
+    ///   - indexPath: indexpath of the tableview
     func setupCell(searchPlaceTableViewCell: SearchPlaceTableViewCell, indexPath: IndexPath) {
         searchPlaceTableViewCell.labelCity.text =  arrayCityResults[indexPath.row]
     }
@@ -88,6 +110,7 @@ extension SearchPlaceVC: UISearchBarDelegate {
         let placeClient = GMSPlacesClient()
         let filter = GMSAutocompleteFilter()
         filter.type = .city
+        self.arrayCitiesPlaceId.removeAll()
         
         //Call autocomplete query to search locations with the search text passed as parameter and displays only city names
         placeClient.autocompleteQuery(searchText, bounds: nil, filter: filter) { (results, error: Error? ) in
@@ -97,6 +120,7 @@ extension SearchPlaceVC: UISearchBarDelegate {
             if results == nil{
                 print("blank")
                 self.arrayCityResults.removeAll()
+                self.arrayCitiesPlaceId.removeAll()
                 self.tableViewSearchResults.reloadData()
                 return
             }
@@ -104,28 +128,13 @@ extension SearchPlaceVC: UISearchBarDelegate {
             for result in results! {
                 if let result = result as? GMSAutocompletePrediction {
                     
-                    //Fetches place name by finding place id for the particular place
-                    let placeID = result.placeID
-                    placeClient.lookUpPlaceID(placeID!, callback: { (place, error) -> Void in
-                        if let error = error {
-                            print("lookup place id query error: \(error.localizedDescription)")
-                            return
-                        }
-                        
-                        guard let place = place else {
-                            print("No place details for \(placeID)")
-                            return
-                        }
-                        
-                        print("Place name \(place.name)")
-                    })
-                    
                     //appends all city name into the array of cities name
+                    self.arrayCitiesPlaceId.append(result.placeID!)
                     self.arrayCityResults.append(result.attributedFullText.string)
                 }
                 
                 //reloads tableView when new city name is found
-                self.reloadDataWithArray(array: self.arrayCityResults)
+                self.reloadDataWithArray(array: self.arrayCityResults, arrayPlaceIds: self.arrayCitiesPlaceId)
             }
         }
     }
@@ -134,6 +143,7 @@ extension SearchPlaceVC: UISearchBarDelegate {
 
 //MARK: Location manager delegate
 extension SearchPlaceVC: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
@@ -149,8 +159,6 @@ extension SearchPlaceVC: CLLocationManagerDelegate {
     self.lastLocation = lastLocation
     
     let geoCoder = CLGeocoder()
-    print(manager.location?.coordinate.latitude)
-    let myLocation = CLLocation.init(latitude: (manager.location?.coordinate.latitude)!, longitude: (manager.location?.coordinate.longitude)!)
     
     geoCoder.reverseGeocodeLocation(lastLocation) { (arrayPlacemarks, error) in
         if let arrayPlacemarks = arrayPlacemarks as [CLPlacemark]! {

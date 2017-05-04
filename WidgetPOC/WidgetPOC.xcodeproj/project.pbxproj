@@ -13,6 +13,7 @@
 		F45FC17E1EB1263A006EF2E3 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC17D1EB1263A006EF2E3 /* WeatherViewModel.swift */; };
 		F45FC1801EB127DE006EF2E3 /* ModelApiUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC17F1EB127DE006EF2E3 /* ModelApiUtility.swift */; };
 		F45FC1821EB128BA006EF2E3 /* ModelParserUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC1811EB128BA006EF2E3 /* ModelParserUtility.swift */; };
+		F47D27B11EBBE48E002F2144 /* GooglePlaceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47D27B01EBBE48E002F2144 /* GooglePlaceUtility.swift */; };
 		F47E56701EBA8BB400A85502 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E566F1EBA8BB400A85502 /* HomePageVC.swift */; };
 		F47E56741EBA8DF100A85502 /* HomePageLandingImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E56721EBA8DF100A85502 /* HomePageLandingImageTableViewCell.swift */; };
 		F47E56751EBA8DF100A85502 /* HomePageLandingImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F47E56731EBA8DF100A85502 /* HomePageLandingImageTableViewCell.xib */; };
@@ -70,6 +71,7 @@
 		F45FC17D1EB1263A006EF2E3 /* WeatherViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		F45FC17F1EB127DE006EF2E3 /* ModelApiUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelApiUtility.swift; sourceTree = "<group>"; };
 		F45FC1811EB128BA006EF2E3 /* ModelParserUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelParserUtility.swift; sourceTree = "<group>"; };
+		F47D27B01EBBE48E002F2144 /* GooglePlaceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GooglePlaceUtility.swift; path = CommonUtility/GooglePlaceUtility.swift; sourceTree = "<group>"; };
 		F47E566F1EBA8BB400A85502 /* HomePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePageVC.swift; path = Controllers/Homepage/HomePageVC.swift; sourceTree = "<group>"; };
 		F47E56721EBA8DF100A85502 /* HomePageLandingImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePageLandingImageTableViewCell.swift; path = Controllers/Homepage/HomePageLandingImage/HomePageLandingImageTableViewCell.swift; sourceTree = "<group>"; };
 		F47E56731EBA8DF100A85502 /* HomePageLandingImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomePageLandingImageTableViewCell.xib; path = Controllers/Homepage/HomePageLandingImage/HomePageLandingImageTableViewCell.xib; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				F4CF80D61EBAC9D300AD7287 /* ImageUtility.swift */,
+				F47D27B01EBBE48E002F2144 /* GooglePlaceUtility.swift */,
 			);
 			name = CommonUtility;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				F47E56741EBA8DF100A85502 /* HomePageLandingImageTableViewCell.swift in Sources */,
 				F4AD9AF51EB92F5800F92E69 /* Constants.swift in Sources */,
 				F4CF80D71EBAC9D300AD7287 /* ImageUtility.swift in Sources */,
+				F47D27B11EBBE48E002F2144 /* GooglePlaceUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

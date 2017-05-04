@@ -226,6 +226,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageViewBackground" destination="TiE-CA-VWG" id="9bb-ZQ-0g9"/>
                         <outlet property="tableViewMainPage" destination="F3w-bD-xIc" id="geh-Ry-CSa"/>
                     </connections>
                 </viewController>
