@@ -8,6 +8,11 @@ pod 'Alamofire', '~> 4.3'
 pod 'ObjectMapper', '~> 2.2'
 pod 'RealmSwift', '~> 2.4.2'
 pod 'ObjectMapper+Realm', '~> 0.2'
+pod 'GooglePlaces'
+pod 'GooglePlacePicker'
+pod 'GoogleMaps'
+pod 'SDWebImage', '~> 4.0'
+
   # Pods for WidgetPOC
 
 end

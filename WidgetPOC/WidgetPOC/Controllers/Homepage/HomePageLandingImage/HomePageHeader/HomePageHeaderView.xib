@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="HomePageHeaderView" id="iN0-l3-epB" customClass="HomePageHeaderView" customModule="WidgetPOC" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ib-kp-cvO">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JK3-g8-2Bk">
+                            <rect key="frame" x="44" y="0.0" width="282" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="wcb-3T-wI7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.18 PM IST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcr-mv-qpk">
+                            <rect key="frame" x="44" y="24" width="282" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="CA8-jm-gUM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdI-D7-iw0">
+                            <rect key="frame" x="331" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="YHZ-Mt-aix"/>
+                                <constraint firstAttribute="height" constant="44" id="gfe-Xk-Esf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                            <state key="normal" title="+">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="dcr-mv-qpk" firstAttribute="top" secondItem="JK3-g8-2Bk" secondAttribute="bottom" id="38p-2l-FuZ"/>
+                        <constraint firstItem="dcr-mv-qpk" firstAttribute="trailing" secondItem="JK3-g8-2Bk" secondAttribute="trailing" id="4zf-d4-4lU"/>
+                        <constraint firstItem="dcr-mv-qpk" firstAttribute="leading" secondItem="JK3-g8-2Bk" secondAttribute="leading" id="AqK-Jc-fOo"/>
+                        <constraint firstItem="vdI-D7-iw0" firstAttribute="top" secondItem="JK3-g8-2Bk" secondAttribute="top" id="K0T-Cg-SaF"/>
+                        <constraint firstItem="vdI-D7-iw0" firstAttribute="leading" secondItem="JK3-g8-2Bk" secondAttribute="trailing" constant="5" id="eaN-5f-r11"/>
+                        <constraint firstItem="JK3-g8-2Bk" firstAttribute="top" secondItem="0ib-kp-cvO" secondAttribute="top" id="kcM-GQ-u5K"/>
+                        <constraint firstAttribute="trailing" secondItem="vdI-D7-iw0" secondAttribute="trailing" id="krv-H9-j3h"/>
+                        <constraint firstItem="JK3-g8-2Bk" firstAttribute="leading" secondItem="0ib-kp-cvO" secondAttribute="leading" constant="44" id="yrr-Ml-eP4"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="0ib-kp-cvO" secondAttribute="bottom" id="4SO-9d-RqD"/>
+                <constraint firstItem="0ib-kp-cvO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="P7J-uN-7HU"/>
+                <constraint firstItem="0ib-kp-cvO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yaa-7n-OqS"/>
+                <constraint firstAttribute="trailing" secondItem="0ib-kp-cvO" secondAttribute="trailing" id="bgD-YK-B3b"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="buttonSearchCity" destination="vdI-D7-iw0" id="Fah-av-4XM"/>
+                <outlet property="labelCityName" destination="JK3-g8-2Bk" id="Dss-bL-EkN"/>
+                <outlet property="labelCurrentTime" destination="dcr-mv-qpk" id="1Xt-Bb-aQA"/>
+            </connections>
+            <point key="canvasLocation" x="6" y="44"/>
+        </view>
+    </objects>
+</document>
