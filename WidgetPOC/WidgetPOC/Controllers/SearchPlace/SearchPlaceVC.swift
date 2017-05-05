@@ -12,11 +12,10 @@ import MapKit
 //Selected place id
 var selectedPlaceId: String {
     get {
-        return SearchPlaceVC.selectedPlaceId
+        let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
+        return defaults?.value(forKey: "placeId") as! String? ?? "NA"
     }
-    set(value) {
-        SearchPlaceVC.selectedPlaceId = value
-    }
+    set(value) {}
 }
 
 class SearchPlaceVC: UIViewController {
@@ -87,9 +86,13 @@ extension SearchPlaceVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! SearchPlaceTableViewCell
+       // let cell = tableView.cellForRow(at: indexPath) as! SearchPlaceTableViewCell
 
-        SearchPlaceVC.selectedPlaceId = arrayCitiesPlaceId[indexPath.row]
+       // SearchPlaceVC.selectedPlaceId = arrayCitiesPlaceId[indexPath.row]
+        
+        let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
+        defaults?.set(arrayCitiesPlaceId[indexPath.row], forKey: "placeId")
+        defaults?.synchronize()
         
         self.dismiss(animated: false, completion: nil)
     }

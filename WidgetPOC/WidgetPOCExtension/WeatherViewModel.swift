@@ -15,7 +15,7 @@ class WeatherViewModel {
         let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
         
         //access the city variable from that group
-        let city = defaults?.value(forKey: "data") ?? "NA"
+        let city = defaults?.value(forKey: "data") ?? "Pune"
         
         ModelApiUtilityInstance.callWeatherWebService(city: city as! String) { (weatherModel) in
             self.weatherModel = weatherModel ?? WeatherModel()

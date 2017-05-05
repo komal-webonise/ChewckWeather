@@ -12,6 +12,8 @@ class HomePageVC: UIViewController {
     @IBOutlet weak var tableViewMainPage: UITableView!
     @IBOutlet weak var imageViewBackground: UIImageView!
     
+    var weatherViewModel = WeatherViewModel()
+    
     let ESTIMATED_ROW_HEIGHT: CGFloat = 100
     let TABLE_VIEW_HEADER_HEIGHT: CGFloat = 44
     
@@ -20,6 +22,9 @@ class HomePageVC: UIViewController {
         super.viewDidLoad()
        
         initialUISetup()
+
+        loadFirstPhotoForPlace(placeID: selectedPlaceId)
+        tableViewMainPage.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,7 +32,7 @@ class HomePageVC: UIViewController {
         
        loadFirstPhotoForPlace(placeID: selectedPlaceId)
        tableViewMainPage.reloadData()
-        
+       setCityNameInUserDefaults()
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,14 +42,42 @@ class HomePageVC: UIViewController {
     //initial ui setup
     func initialUISetup() {
         tableViewMainPage.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
+        registerNibs()
+        tableViewMainPage.delegate = self
+        tableViewMainPage.dataSource = self
+        weatherViewModel.webServiceCallForWeatherModel {
+            print("jvchvjkhdiugyjncv mnxl mfjidus fkmcnkldsjfoi")
+            print("weather:\(self.weatherViewModel.weatherModel.coord.lat)")
+        }
+    }
+    
+    /// Registers nibs for the table view
+    func registerNibs() {
         tableViewMainPage.register(
             UINib(nibName: HomePageLandingImageTableViewCell.NIB_NAME, bundle: nil),
             forCellReuseIdentifier: HomePageLandingImageTableViewCell.NIB_NAME)
         tableViewMainPage.register(
             UINib(nibName: HomePageHeaderView.NIB_NAME, bundle: nil),
             forHeaderFooterViewReuseIdentifier: HomePageHeaderView.NIB_NAME)
-        tableViewMainPage.delegate = self
-        tableViewMainPage.dataSource = self
+        tableViewMainPage.register(
+            UINib(nibName: WeatherDetailsTableViewCell.NIB_NAME, bundle: nil),
+            forCellReuseIdentifier: WeatherDetailsTableViewCell.NIB_NAME)
+        tableViewMainPage.register(
+            UINib(nibName: SunTimingsTableViewCell.NIB_NAME, bundle: nil),
+            forHeaderFooterViewReuseIdentifier: SunTimingsTableViewCell.NIB_NAME)
+        tableViewMainPage.register(
+            UINib(nibName: CoordinatesTableViewCell.NIB_NAME, bundle: nil),
+            forCellReuseIdentifier: CoordinatesTableViewCell.NIB_NAME)
+    }
+    
+    /// Sets city name in user defaults
+    func setCityNameInUserDefaults() {
+        GooglePlaceUtility.lookUpPlaceNameUsing(placeId: selectedPlaceId) { (place) in
+            let data = place
+            let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
+            defaults?.set(data, forKey: "data")
+            defaults?.synchronize()
+        }
     }
 
 }

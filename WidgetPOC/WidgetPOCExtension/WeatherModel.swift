@@ -10,13 +10,20 @@ import ObjectMapper
 
 class WeatherModel : Object,Mappable  {
     dynamic var coord: Coord!
+    dynamic var main: Main!
+    dynamic var sys: Sys!
+    dynamic var wind: Wind!
+    
     required convenience init?(map: Map) {
         self.init()
     }
     
     // Mappable
     func mapping(map: Map) {
-        coord <- map["coord"]
+        coord <- map[ApiKeys.COORD]
+        main <- map[ApiKeys.MAIN]
+        sys <- map[ApiKeys.SYS]
+        wind <- map[ApiKeys.WIND]
     }
     
     /// Save weather model object
@@ -47,8 +54,8 @@ class WeatherModel : Object,Mappable  {
 }
 
 class Coord : Object,Mappable {
-    dynamic var lat:Double = 0.0
-    dynamic var lon: Double = 0.0
+    dynamic var lat:Double = Constants.ZERO_VALUE
+    dynamic var lon: Double = Constants.ZERO_VALUE
     
     required convenience init?(map: Map) {
         self.init()
@@ -56,8 +63,58 @@ class Coord : Object,Mappable {
     
     // Mappable
     func mapping(map: Map) {
-        lat <- map["lat"]
-        lon <- map["lon"]
+        lat <- map[ApiKeys.LAT]
+        lon <- map[ApiKeys.LON]
     }
 }
 
+class Main : Object,Mappable {
+    dynamic var temp: Double = Constants.ZERO_VALUE
+    dynamic var tempMin: Double = Constants.ZERO_VALUE
+    dynamic var tempMax: Double = Constants.ZERO_VALUE
+    dynamic var pressure: Double = Constants.ZERO_VALUE
+    dynamic var humidity: Double = Constants.ZERO_VALUE
+
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        temp <- map[ApiKeys.TEMP]
+        tempMin <- map[ApiKeys.TEMP_MIN]
+        tempMax <- map[ApiKeys.TEMP_MAX]
+        pressure <- map[ApiKeys.PRESSURE]
+        humidity <- map[ApiKeys.HUMIDITY]
+    }
+}
+
+class Wind : Object,Mappable {
+    dynamic var speed: Double = Constants.ZERO_VALUE
+    dynamic var deg: Double = Constants.ZERO_VALUE
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        speed <- map[ApiKeys.SPEED]
+        deg <- map[ApiKeys.DEG]
+    }
+}
+
+class Sys : Object,Mappable {
+    dynamic var sunrise: Double = Constants.ZERO_VALUE
+    dynamic var sunset: Double = Constants.ZERO_VALUE
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    // Mappable
+    func mapping(map: Map) {
+        sunrise <- map[ApiKeys.SUNRISE]
+        sunset <- map[ApiKeys.SUNSET]
+    }
+}
