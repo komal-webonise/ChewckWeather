@@ -29,10 +29,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lNB-sz-J1w">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="257"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aLD-o2-uUh">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="257"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jid-Cd-KHA">
                                 <rect key="frame" x="10" y="137" width="160" height="90"/>
                                 <subviews>
@@ -100,12 +96,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="aLD-o2-uUh" secondAttribute="bottom" id="AQz-wr-Nwp"/>
                             <constraint firstAttribute="bottom" secondItem="jid-Cd-KHA" secondAttribute="bottom" constant="30" id="S80-xr-h3C"/>
-                            <constraint firstItem="aLD-o2-uUh" firstAttribute="leading" secondItem="lNB-sz-J1w" secondAttribute="leading" id="TAt-uN-lJM"/>
-                            <constraint firstItem="aLD-o2-uUh" firstAttribute="top" secondItem="lNB-sz-J1w" secondAttribute="top" id="TWG-en-ZdB"/>
                             <constraint firstItem="jid-Cd-KHA" firstAttribute="leading" secondItem="lNB-sz-J1w" secondAttribute="leading" constant="10" id="bY4-g5-InN"/>
-                            <constraint firstAttribute="trailing" secondItem="aLD-o2-uUh" secondAttribute="trailing" id="dth-Cv-TOR"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -118,7 +110,6 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="imageViewBackground" destination="aLD-o2-uUh" id="632-v5-fPZ"/>
                 <outlet property="labelAverageTemperature" destination="lCF-Uz-nYW" id="T2b-tQ-5HI"/>
                 <outlet property="labelMaxTemperature" destination="E7s-zT-Gav" id="iKm-Ax-1hP"/>
                 <outlet property="labelMinTemperature" destination="CuO-MM-TpQ" id="Q6P-YE-Y0N"/>

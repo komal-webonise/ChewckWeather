@@ -42,7 +42,7 @@ class HomePageVC: UIViewController {
        loadFirstPhotoForPlace(placeID: selectedPlaceId)
        tableViewMainPage.reloadData()
        setCityNameInUserDefaults()
-    //labelCityTime.text = getTime()
+    
         //looks up for place name as per the place Id
         GooglePlaceUtility.lookUpPlaceNameUsing(placeId: selectedPlaceId) { (place) in
             self.labelPlace.text = place
@@ -55,13 +55,13 @@ class HomePageVC: UIViewController {
     
     //initial ui setup
     func initialUISetup() {
-       // imageViewBackground.image = UIImage(named: "background")
         registerNibs()
         tableViewMainPage.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
-        tableViewMainPage.delegate = self
-        tableViewMainPage.dataSource = self
+        
         weatherViewModel.webServiceCallForWeatherModel {
             print("weather:\(self.weatherViewModel.weatherModel.coord.lat)")
+            self.tableViewMainPage.delegate = self
+            self.tableViewMainPage.dataSource = self
         }
     }
     

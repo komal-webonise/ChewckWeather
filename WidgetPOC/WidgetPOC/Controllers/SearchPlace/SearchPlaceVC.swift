@@ -22,6 +22,7 @@ class SearchPlaceVC: UIViewController {
     
     @IBOutlet weak var searchBarLocationName: UISearchBar!
     @IBOutlet weak var tableViewSearchResults: UITableView!
+    @IBOutlet weak var buttonDetectMyLocation: UIButton!
     
     var noOfRows = 1
     var arrayCityResults = [String]()
@@ -53,6 +54,7 @@ class SearchPlaceVC: UIViewController {
     
     /// Initial ui setup
     func initialUISetup() {
+        UIUtility.addBorderToButton(button: buttonDetectMyLocation)
         tableViewSearchResults.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
         tableViewSearchResults.delegate = self
         tableViewSearchResults.dataSource = self

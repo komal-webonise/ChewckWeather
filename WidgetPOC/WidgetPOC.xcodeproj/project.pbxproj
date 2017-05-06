@@ -16,6 +16,8 @@
 		F41AF9321EBD741F00812273 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41AF9301EBD741F00812273 /* Roboto-Medium.ttf */; };
 		F41AF9341EBD742A00812273 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41AF9331EBD742A00812273 /* Roboto-Light.ttf */; };
 		F41AF9351EBD742A00812273 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41AF9331EBD742A00812273 /* Roboto-Light.ttf */; };
+		F41AF9371EBD7D3300812273 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41AF9361EBD7D3300812273 /* UIUtility.swift */; };
+		F41AF9381EBD7D3300812273 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41AF9361EBD7D3300812273 /* UIUtility.swift */; };
 		F45FC17C1EB12606006EF2E3 /* AlamofireUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC17B1EB12606006EF2E3 /* AlamofireUtility.swift */; };
 		F45FC17E1EB1263A006EF2E3 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC17D1EB1263A006EF2E3 /* WeatherViewModel.swift */; };
 		F45FC1801EB127DE006EF2E3 /* ModelApiUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC17F1EB127DE006EF2E3 /* ModelApiUtility.swift */; };
@@ -86,6 +88,7 @@
 		F41AF92D1EBD741100812273 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		F41AF9301EBD741F00812273 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		F41AF9331EBD742A00812273 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		F41AF9361EBD7D3300812273 /* UIUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIUtility.swift; path = CommonUtility/UIUtility.swift; sourceTree = "<group>"; };
 		F45FC17B1EB12606006EF2E3 /* AlamofireUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireUtility.swift; sourceTree = "<group>"; };
 		F45FC17D1EB1263A006EF2E3 /* WeatherViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		F45FC17F1EB127DE006EF2E3 /* ModelApiUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelApiUtility.swift; sourceTree = "<group>"; };
@@ -319,6 +322,7 @@
 				F4CF80D61EBAC9D300AD7287 /* ImageUtility.swift */,
 				F47D27B01EBBE48E002F2144 /* GooglePlaceUtility.swift */,
 				F41AF92A1EBD399E00812273 /* DateExtension.swift */,
+				F41AF9361EBD7D3300812273 /* UIUtility.swift */,
 			);
 			name = CommonUtility;
 			sourceTree = "<group>";
@@ -532,6 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41AF9371EBD7D3300812273 /* UIUtility.swift in Sources */,
 				F4AD9AE21EB913FE00F92E69 /* ViewController.swift in Sources */,
 				F47D27B41EBBF684002F2144 /* WeatherViewModel.swift in Sources */,
 				F47D27B61EBBF689002F2144 /* ModelParserUtility.swift in Sources */,
@@ -560,6 +565,7 @@
 				F45FC1821EB128BA006EF2E3 /* ModelParserUtility.swift in Sources */,
 				F45FC17C1EB12606006EF2E3 /* AlamofireUtility.swift in Sources */,
 				F4FBC43C1EB0334500F118AE /* WeatherModel.swift in Sources */,
+				F41AF9381EBD7D3300812273 /* UIUtility.swift in Sources */,
 				F47D27B71EBC0C86002F2144 /* Constants.swift in Sources */,
 				F4A39C7B1EAEE9B40024288B /* TodayViewController.swift in Sources */,
 				F45FC1801EB127DE006EF2E3 /* ModelApiUtility.swift in Sources */,
