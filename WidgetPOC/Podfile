@@ -12,6 +12,7 @@ pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 pod 'GoogleMaps'
 pod 'SDWebImage', '~> 4.0'
+pod 'LatLongToTimezone', '~> 1.1'
 
   # Pods for WidgetPOC
 

@@ -7,17 +7,28 @@ import UIKit
 
 class WeatherDetailsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var labelPressure: UILabel!
+    @IBOutlet weak var labelHumidity: UILabel!
+    @IBOutlet weak var labelWindSpeed: UILabel!
+    @IBOutlet weak var labelWindDegree: UILabel!
+    
     static let NIB_NAME = "WeatherDetailsTableViewCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    /// Setup the cell label values
+    ///
+    /// - Parameter weatherModel: weather model from which the values are to be represented
+    func setup(weatherModel: WeatherModel) {
+        labelHumidity.text = String(weatherModel.main.humidity) + SpecialCharacters.PERCENT
+        labelPressure.text = String(weatherModel.main.pressure) +
+                             SpecialCharacters.PRESSURE_UNIT
+        labelWindSpeed.text = SpecialCharacters.WIND_SPEED_INITIAL +
+                              String(weatherModel.wind.speed) +
+                              SpecialCharacters.WIND_SPEED_UNIT
+        labelWindDegree.text = String(weatherModel.wind.deg) +
+                               SpecialCharacters.DEGREE_SIGN
     }
-    
 }

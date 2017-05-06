@@ -12,10 +12,19 @@ class HomePageVC: UIViewController {
     @IBOutlet weak var tableViewMainPage: UITableView!
     @IBOutlet weak var imageViewBackground: UIImageView!
     
+    @IBOutlet weak var labelCityTime: UILabel!
+    @IBOutlet weak var labelPlace: UILabel!
     var weatherViewModel = WeatherViewModel()
     
     let ESTIMATED_ROW_HEIGHT: CGFloat = 100
     let TABLE_VIEW_HEADER_HEIGHT: CGFloat = 44
+    
+    enum HomePageCells: Int {
+        case landingImage = 0
+        case weatherDetails
+        case sunTimings
+        case coordinates
+    }
     
     //MARK: View cycle methods
     override func viewDidLoad() {
@@ -33,6 +42,11 @@ class HomePageVC: UIViewController {
        loadFirstPhotoForPlace(placeID: selectedPlaceId)
        tableViewMainPage.reloadData()
        setCityNameInUserDefaults()
+    //labelCityTime.text = getTime()
+        //looks up for place name as per the place Id
+        GooglePlaceUtility.lookUpPlaceNameUsing(placeId: selectedPlaceId) { (place) in
+            self.labelPlace.text = place
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,12 +55,12 @@ class HomePageVC: UIViewController {
     
     //initial ui setup
     func initialUISetup() {
-        tableViewMainPage.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
+       // imageViewBackground.image = UIImage(named: "background")
         registerNibs()
+        tableViewMainPage.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
         tableViewMainPage.delegate = self
         tableViewMainPage.dataSource = self
         weatherViewModel.webServiceCallForWeatherModel {
-            print("jvchvjkhdiugyjncv mnxl mfjidus fkmcnkldsjfoi")
             print("weather:\(self.weatherViewModel.weatherModel.coord.lat)")
         }
     }
@@ -57,14 +71,8 @@ class HomePageVC: UIViewController {
             UINib(nibName: HomePageLandingImageTableViewCell.NIB_NAME, bundle: nil),
             forCellReuseIdentifier: HomePageLandingImageTableViewCell.NIB_NAME)
         tableViewMainPage.register(
-            UINib(nibName: HomePageHeaderView.NIB_NAME, bundle: nil),
-            forHeaderFooterViewReuseIdentifier: HomePageHeaderView.NIB_NAME)
-        tableViewMainPage.register(
             UINib(nibName: WeatherDetailsTableViewCell.NIB_NAME, bundle: nil),
             forCellReuseIdentifier: WeatherDetailsTableViewCell.NIB_NAME)
-        tableViewMainPage.register(
-            UINib(nibName: SunTimingsTableViewCell.NIB_NAME, bundle: nil),
-            forHeaderFooterViewReuseIdentifier: SunTimingsTableViewCell.NIB_NAME)
         tableViewMainPage.register(
             UINib(nibName: CoordinatesTableViewCell.NIB_NAME, bundle: nil),
             forCellReuseIdentifier: CoordinatesTableViewCell.NIB_NAME)
@@ -80,52 +88,99 @@ class HomePageVC: UIViewController {
         }
     }
 
+    //MARK: Action button
+    @IBAction func buttonSearchLocationTapped(_ sender: Any) {
+        let searchPlaceVC = StoryBoards.MAIN.instantiateViewController(withIdentifier: ViewControllersIds.SEARCH_PLACE_VC) as! SearchPlaceVC
+        self.present(searchPlaceVC, animated: false, completion: nil)
+    }
+    
+    /// Gets sunset display time with timeZone got from coordinates
+    ///
+    /// - Returns: returns sunset
+    func getTime() -> String {
+        let timeZone = Date.getTimeZoneByCoordinate(
+            lattitude: weatherViewModel.weatherModel.coord.lat,
+            longitude: weatherViewModel.weatherModel.coord.lon)
+        
+        //Get sunset display time with timeZone got from coordinates
+        let time =  Date(timeIntervalSince1970: Date().timeIntervalSince1970 as TimeInterval).getTime(withTimeZone: timeZone)
+        
+        return time
+    }
 }
 
 //MARK: Tableview delegate methods
 extension HomePageVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let homePageHeaderView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomePageHeaderView.NIB_NAME) as! HomePageHeaderView
-        homePageHeaderView.buttonSearchCity.addTarget(self, action: #selector(buttonSearchCityTapped), for: .touchUpInside)
-       
-        //looks up for place name as per the place Id
-        GooglePlaceUtility.lookUpPlaceNameUsing(placeId: selectedPlaceId) { (place) in
-            homePageHeaderView.labelCityName.text = place
-        }
-        
-        return homePageHeaderView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TABLE_VIEW_HEADER_HEIGHT
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let homePageLandingImageTableViewCell = tableView.dequeueReusableCell(withIdentifier: HomePageLandingImageTableViewCell.NIB_NAME) as! HomePageLandingImageTableViewCell
-        homePageLandingImageTableViewCell.labelAverageTemperature.text =
-            homePageLandingImageTableViewCell.labelAverageTemperature.text! +
-            SpecialCharacters.DEGREE_SIGN
+        switch indexPath.row {
+            case HomePageCells.landingImage.rawValue :
+                return setupLandingImageCell(tableView: tableView, indexpath: indexPath)
+            case HomePageCells.weatherDetails.rawValue :
+                return setupWeatherDetailsCell(tableView: tableView, indexpath: indexPath)
+            case HomePageCells.sunTimings.rawValue :
+                return setupCoordinatesCell(tableView: tableView, indexpath: indexPath)
+            case HomePageCells.coordinates.rawValue :
+                return setupCoordinatesCell(tableView: tableView, indexpath: indexPath)
+            default:
+                return setupLandingImageCell(tableView: tableView, indexpath: indexPath)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return  indexPath.row == 0 ?
+        (self.view.frame.size.height - TABLE_VIEW_HEADER_HEIGHT ) :
+        UITableViewAutomaticDimension
+    }
+    
+    /// Setups cell for home page landing image
+    ///
+    /// - Parameters:
+    ///   - tableView: tableview on which cell is to be setup
+    ///   - indexpath: index path of cell
+    /// - Returns: returns cell with cell set
+    func setupLandingImageCell(tableView: UITableView, indexpath: IndexPath) -> HomePageLandingImageTableViewCell {
+        let homePageLandingImageTableViewCell = tableViewMainPage.dequeueReusableCell(withIdentifier: HomePageLandingImageTableViewCell.NIB_NAME) as! HomePageLandingImageTableViewCell
         homePageLandingImageTableViewCell.backgroundColor = .clear
-        
-        //setupCell(searchPlaceTableViewCell: searchPlaceTableViewCell, indexPath: indexPath)
+        homePageLandingImageTableViewCell.setup(weatherModel: weatherViewModel.weatherModel)
         
         return homePageLandingImageTableViewCell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    /// Setups cell for weather details
+    ///
+    /// - Parameters:
+    ///   - tableView: tableview on which cell is to be setup
+    ///   - indexpath: index path of cell
+    /// - Returns: returns cell with cell set
+    func setupWeatherDetailsCell(tableView: UITableView, indexpath: IndexPath) -> WeatherDetailsTableViewCell {
+        let weatherDetailsTableViewCell = tableViewMainPage.dequeueReusableCell(withIdentifier: WeatherDetailsTableViewCell.NIB_NAME) as! WeatherDetailsTableViewCell
+        weatherDetailsTableViewCell.setup(weatherModel: weatherViewModel.weatherModel)
+        weatherDetailsTableViewCell.backgroundColor = .clear
+        
+        return weatherDetailsTableViewCell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (self.view.frame.size.height - TABLE_VIEW_HEADER_HEIGHT )
+    /// Setups cell for displaying coordinates
+    ///
+    /// - Parameters:
+    ///   - tableView: tableview on which cell is to be setup
+    ///   - indexpath: index path of cell
+    /// - Returns: returns cell with cell set
+    func setupCoordinatesCell(tableView: UITableView, indexpath: IndexPath) -> CoordinatesTableViewCell {
+        let coordinatesTableViewCell = tableViewMainPage.dequeueReusableCell(withIdentifier: CoordinatesTableViewCell.NIB_NAME) as! CoordinatesTableViewCell
+        indexpath.row == HomePageCells.sunTimings.rawValue ?
+            coordinatesTableViewCell.setup(weatherModel: weatherViewModel.weatherModel, isSunTimings: true) :
+            coordinatesTableViewCell.setup(weatherModel: weatherViewModel.weatherModel, isSunTimings: false)
+        coordinatesTableViewCell.backgroundColor = .clear
+        
+        return coordinatesTableViewCell
     }
     
-    /// Burron search for city location tapped
-    func buttonSearchCityTapped() {
-        let searchPlaceVC = StoryBoards.MAIN.instantiateViewController(withIdentifier: ViewControllersIds.SEARCH_PLACE_VC) as! SearchPlaceVC
-        self.present(searchPlaceVC, animated: false, completion: nil)
-    }
 }
 
 //Google photo finder according to place name
@@ -156,7 +211,13 @@ extension HomePageVC {
                 print("Error: \(error.localizedDescription)")
             } else {
                 self.imageViewBackground.image = photo
+                //self.imageViewBackground.addBlurEffect()
             }
         })
     }
+}
+
+//MARK: Scroll view delegate
+extension HomePageVC: UIScrollViewDelegate {
+    
 }

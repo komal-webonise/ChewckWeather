@@ -10,6 +10,8 @@ typealias StoryBoards = Constants.StoryBoards
 typealias ViewControllersIds = Constants.ViewControllersIds
 typealias SpecialCharacters = Constants.SpecialCharacters
 typealias ApiKeys = Constants.ApiKeys
+typealias LabelTitles = Constants.LabelTitles
+typealias DateFormatters = Constants.DateFormatters
 
 class Constants {
     
@@ -25,6 +27,10 @@ class Constants {
     
     struct SpecialCharacters {
         static let DEGREE_SIGN = "°"
+        static let PERCENT = "%"
+        static let WIND_SPEED_UNIT = "m/hr"
+        static let PRESSURE_UNIT = "hPa"
+        static let WIND_SPEED_INITIAL = "w "
     }
     
     struct ApiKeys {
@@ -45,4 +51,19 @@ class Constants {
         static let SUNRISE = "sunrise"
         static let SUNSET = "sunset"
     }
+    
+    struct LabelTitles {
+        static let SUN_TIMINGS = "Sun Timings"
+        static let COORDINATES = "Coordinates"
+        static let SUNRISE = "Sunrise"
+        static let SUNSET = "Sunset"
+        static let LATITUDE = "Latitude"
+        static let LONGITUDE = "Longitude"
+    }
+    
+    struct DateFormatters {
+        static let DATE_FORMAT_DD_MM_YYYY = "dd-MM-yyyy"
+        static let DATE_FORMAT_DD_MM_YY_HH_MM_AM_PM = "dd-MM-yyyy hh:mm a"
+    }
+
 }

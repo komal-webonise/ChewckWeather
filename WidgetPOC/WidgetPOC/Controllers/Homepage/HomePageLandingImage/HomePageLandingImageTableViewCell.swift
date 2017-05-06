@@ -13,6 +13,7 @@ class HomePageLandingImageTableViewCell: UITableViewCell {
     @IBOutlet weak var labelAverageTemperature: UILabel!
     
     static let NIB_NAME = "HomePageLandingImageTableViewCell"
+    let TEMPERATURE_CONVERTER = 273.15
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,4 +23,12 @@ class HomePageLandingImageTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    /// Setup the cell label values
+    ///
+    /// - Parameter weatherModel: weather model from which the values are to be represented
+    func setup(weatherModel: WeatherModel) {
+        labelMaxTemperature.text = String(Int(weatherModel.main.tempMax - TEMPERATURE_CONVERTER)) + SpecialCharacters.DEGREE_SIGN
+        labelMinTemperature.text = String(Int(weatherModel.main.tempMin  - TEMPERATURE_CONVERTER)) + SpecialCharacters.DEGREE_SIGN
+        labelAverageTemperature.text = String(Int(weatherModel.main.temp - TEMPERATURE_CONVERTER)) + SpecialCharacters.DEGREE_SIGN
+    }
 }
