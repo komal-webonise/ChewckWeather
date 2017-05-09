@@ -2,28 +2,33 @@
 //  TodayViewController.swift
 //  WidgetPOCExtension
 //
-//  Created by komal lunkad on 24/04/17.
-//  Copyright © 2017 komal lunkad. All rights reserved.
-//
 
 import UIKit
 import NotificationCenter
 import Alamofire
-
+import GooglePlaces
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     //http://api.openweathermap.org/data/2.5/weather?q=pune&appid=82d42d1bbaa0bbec840a96ca44a1660d
     
+    @IBOutlet weak var labelCityTemperature: UILabel!
+    
+    @IBOutlet weak var labelCity: UILabel!
     var weatherViewModel = WeatherViewModel()
+    let TEMPERATURE_CONVERTER = 273.15
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
-        print(defaults?.value(forKey: "data") ?? "NA")
+        let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
+        print(defaults?.value(forKey: UserDefaultsKeys.PLACE) ?? DefaultValues.DEFAULT_PLACE)
         
         weatherViewModel.webServiceCallForWeatherModel {
-            print(self.weatherViewModel.weatherModel.coord?.lat ?? "no value")
+            self.labelCityTemperature.text = String(Int(self.weatherViewModel.weatherModel.main.temp - self.TEMPERATURE_CONVERTER)) + SpecialCharacters.DEGREE_SIGN
         }
+        
+        //looks up for place name as per the place I
+        let place  = defaults?.value(forKey: UserDefaultsKeys.PLACE) as? String ?? DefaultValues.DEFAULT_PLACE
+        labelCity.text = place
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,6 +43,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
+        //looks up for place name as per the place Id
+        let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
+        let place  = defaults?.value(forKey: UserDefaultsKeys.PLACE) as? String ?? DefaultValues.DEFAULT_PLACE
+        labelCity.text = place
+        
+        weatherViewModel.webServiceCallForWeatherModel {
+            self.labelCityTemperature.text = String(Int(self.weatherViewModel.weatherModel.main.temp - self.TEMPERATURE_CONVERTER)) + SpecialCharacters.DEGREE_SIGN
+        }
         completionHandler(NCUpdateResult.newData)
     }
     

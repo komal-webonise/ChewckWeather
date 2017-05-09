@@ -12,8 +12,8 @@ import MapKit
 //Selected place id
 var selectedPlaceId: String {
     get {
-        let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
-        return defaults?.value(forKey: "placeId") as! String? ?? "NA"
+        let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
+        return defaults?.value(forKey: UserDefaultsKeys.PLACE_ID) as! String? ?? DefaultValues.DEFAULT_PLACE_ID
     }
     set(value) {}
 }
@@ -92,8 +92,8 @@ extension SearchPlaceVC: UITableViewDelegate, UITableViewDataSource {
 
        // SearchPlaceVC.selectedPlaceId = arrayCitiesPlaceId[indexPath.row]
         
-        let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
-        defaults?.set(arrayCitiesPlaceId[indexPath.row], forKey: "placeId")
+        let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
+        defaults?.set(arrayCitiesPlaceId[indexPath.row], forKey: UserDefaultsKeys.PLACE_ID)
         defaults?.synchronize()
         
         self.dismiss(animated: false, completion: nil)

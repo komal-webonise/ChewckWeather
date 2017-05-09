@@ -11,9 +11,9 @@ class HomePageVC: UIViewController {
     
     @IBOutlet weak var tableViewMainPage: UITableView!
     @IBOutlet weak var imageViewBackground: UIImageView!
-    
     @IBOutlet weak var labelCityTime: UILabel!
     @IBOutlet weak var labelPlace: UILabel!
+    
     var weatherViewModel = WeatherViewModel()
     
     let ESTIMATED_ROW_HEIGHT: CGFloat = 100
@@ -40,7 +40,6 @@ class HomePageVC: UIViewController {
         super.viewWillAppear(animated)
         
        loadFirstPhotoForPlace(placeID: selectedPlaceId)
-       tableViewMainPage.reloadData()
        setCityNameInUserDefaults()
     
         //looks up for place name as per the place Id
@@ -59,9 +58,10 @@ class HomePageVC: UIViewController {
         tableViewMainPage.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
         
         weatherViewModel.webServiceCallForWeatherModel {
-            print("weather:\(self.weatherViewModel.weatherModel.coord.lat)")
             self.tableViewMainPage.delegate = self
             self.tableViewMainPage.dataSource = self
+            self.tableViewMainPage.reloadData()
+            self.labelCityTime.text = self.getTime()
         }
     }
     
@@ -82,9 +82,15 @@ class HomePageVC: UIViewController {
     func setCityNameInUserDefaults() {
         GooglePlaceUtility.lookUpPlaceNameUsing(placeId: selectedPlaceId) { (place) in
             let data = place
-            let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
-            defaults?.set(data, forKey: "data")
+            let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
+            defaults?.set(data, forKey: UserDefaultsKeys.PLACE)
             defaults?.synchronize()
+            self.weatherViewModel.webServiceCallForWeatherModel {
+                self.tableViewMainPage.delegate = self
+                self.tableViewMainPage.dataSource = self
+                self.tableViewMainPage.reloadData()
+                self.labelCityTime.text = self.getTime()
+            }
         }
     }
 
@@ -102,8 +108,15 @@ class HomePageVC: UIViewController {
             lattitude: weatherViewModel.weatherModel.coord.lat,
             longitude: weatherViewModel.weatherModel.coord.lon)
         
-        //Get sunset display time with timeZone got from coordinates
-        let time =  Date(timeIntervalSince1970: Date().timeIntervalSince1970 as TimeInterval).getTime(withTimeZone: timeZone)
+        //Get current time display according to time zone
+        
+        let date = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.timeZone = timeZone
+        
+        let time = dateFormatter.string(from: date)
         
         return time
     }
@@ -211,13 +224,7 @@ extension HomePageVC {
                 print("Error: \(error.localizedDescription)")
             } else {
                 self.imageViewBackground.image = photo
-                //self.imageViewBackground.addBlurEffect()
             }
         })
     }
-}
-
-//MARK: Scroll view delegate
-extension HomePageVC: UIScrollViewDelegate {
-    
 }

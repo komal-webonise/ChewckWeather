@@ -14,7 +14,7 @@ class GooglePlaceUtility {
     /// - Returns: returns place name
     static func lookUpPlaceNameUsing(placeId: String, completionBlock: @escaping((_ placeFound: String) -> ())) {
         var placeName = ""
-        
+         
         let placeClient = GMSPlacesClient()
         let filter = GMSAutocompleteFilter()
         filter.type = .city

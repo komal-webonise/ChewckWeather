@@ -18,6 +18,9 @@
 		F41AF9351EBD742A00812273 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41AF9331EBD742A00812273 /* Roboto-Light.ttf */; };
 		F41AF9371EBD7D3300812273 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41AF9361EBD7D3300812273 /* UIUtility.swift */; };
 		F41AF9381EBD7D3300812273 /* UIUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41AF9361EBD7D3300812273 /* UIUtility.swift */; };
+		F41EA28A1EC14502003F239F /* GooglePlaceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47D27B01EBBE48E002F2144 /* GooglePlaceUtility.swift */; };
+		F41EA28C1EC14E66003F239F /* SearchPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD9AF21EB9235100F92E69 /* SearchPlaceVC.swift */; };
+		F41EA28D1EC14E6C003F239F /* SearchPlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD9AF71EB94D6B00F92E69 /* SearchPlaceTableViewCell.swift */; };
 		F45FC17C1EB12606006EF2E3 /* AlamofireUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC17B1EB12606006EF2E3 /* AlamofireUtility.swift */; };
 		F45FC17E1EB1263A006EF2E3 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC17D1EB1263A006EF2E3 /* WeatherViewModel.swift */; };
 		F45FC1801EB127DE006EF2E3 /* ModelApiUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FC17F1EB127DE006EF2E3 /* ModelApiUtility.swift */; };
@@ -567,8 +570,11 @@
 				F4FBC43C1EB0334500F118AE /* WeatherModel.swift in Sources */,
 				F41AF9381EBD7D3300812273 /* UIUtility.swift in Sources */,
 				F47D27B71EBC0C86002F2144 /* Constants.swift in Sources */,
+				F41EA28C1EC14E66003F239F /* SearchPlaceVC.swift in Sources */,
 				F4A39C7B1EAEE9B40024288B /* TodayViewController.swift in Sources */,
+				F41EA28D1EC14E6C003F239F /* SearchPlaceTableViewCell.swift in Sources */,
 				F45FC1801EB127DE006EF2E3 /* ModelApiUtility.swift in Sources */,
+				F41EA28A1EC14502003F239F /* GooglePlaceUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

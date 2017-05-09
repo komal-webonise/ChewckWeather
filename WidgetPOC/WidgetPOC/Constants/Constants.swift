@@ -12,10 +12,12 @@ typealias SpecialCharacters = Constants.SpecialCharacters
 typealias ApiKeys = Constants.ApiKeys
 typealias LabelTitles = Constants.LabelTitles
 typealias DateFormatters = Constants.DateFormatters
-
+typealias UserDefaultsKeys = Constants.UserDefaultsKeys
+typealias DefaultValues = Constants.DefaultValues
 class Constants {
     
     static let ZERO_VALUE = 0.0
+    static let GROUP_SUITE_NAME = "group.WidgetPOCGroup"
     
     struct ViewControllersIds {
         static let SEARCH_PLACE_VC = "SearchPlaceVC"
@@ -31,6 +33,7 @@ class Constants {
         static let WIND_SPEED_UNIT = "m/hr"
         static let PRESSURE_UNIT = "hPa"
         static let WIND_SPEED_INITIAL = "w "
+        static let WHITESPACE = " "
     }
     
     struct ApiKeys {
@@ -64,6 +67,16 @@ class Constants {
     struct DateFormatters {
         static let DATE_FORMAT_DD_MM_YYYY = "dd-MM-yyyy"
         static let DATE_FORMAT_DD_MM_YY_HH_MM_AM_PM = "dd-MM-yyyy hh:mm a"
+        static let DATE_FORMAT_HH_MM = "hh:mm"
     }
 
+    struct UserDefaultsKeys {
+        static let PLACE = "place"
+        static let PLACE_ID = "placeId"
+    }
+    
+    struct DefaultValues {
+        static let DEFAULT_PLACE_ID = "ChIJARFGZy6_wjsRQ-Oenb9DjYI"
+        static let DEFAULT_PLACE = "Pune"
+    }
 }

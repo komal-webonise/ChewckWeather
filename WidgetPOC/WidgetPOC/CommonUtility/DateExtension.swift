@@ -60,6 +60,8 @@ extension Date {
     static func getTimeZoneByCoordinate(lattitude: Double, longitude: Double) -> TimeZone {
         let location = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
         let timeZone = TimezoneMapper.latLngToTimezone(location)
+        
         return timeZone!
     }
+    
 }
