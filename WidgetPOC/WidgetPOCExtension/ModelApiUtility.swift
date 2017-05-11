@@ -17,11 +17,11 @@ class ModelApiUtility {
     ///   - completionHandlerWithWeatherModel: comletion handler block
     func callWeatherWebService(city: String,
                                completionHandlerWithWeatherModel: ((_ weatherModel: WeatherModel?) -> ())?) {
-        let URL = "http://api.openweathermap.org/data/2.5/weather"
         let parameters = [
-            "q" : city,
-            "appid":"82d42d1bbaa0bbec840a96ca44a1660d"]
-        AlamofireUtilityInstance.getCallWithAlamofireUtility(url: URL,
+            ParameterValues.QUERY: city,
+            ParameterValues.APP_ID: ParameterValues.APP_ID_VALUE]
+        
+        AlamofireUtilityInstance.getCallWithAlamofireUtility(url: Constants.URL,
                                     requestParams: parameters,
                                     success: { (response) in
             

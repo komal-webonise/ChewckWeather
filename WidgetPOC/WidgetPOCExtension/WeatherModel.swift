@@ -11,7 +11,7 @@ import ObjectMapper
 class WeatherModel : Object,Mappable  {
     dynamic var coord: Coord!
     dynamic var main: Main!
-    dynamic var sys: Sys!
+    dynamic var system: System!
     dynamic var wind: Wind!
     
     required convenience init?(map: Map) {
@@ -22,7 +22,7 @@ class WeatherModel : Object,Mappable  {
     func mapping(map: Map) {
         coord <- map[ApiKeys.COORD]
         main <- map[ApiKeys.MAIN]
-        sys <- map[ApiKeys.SYS]
+        system <- map[ApiKeys.SYS]
         wind <- map[ApiKeys.WIND]
     }
     
@@ -104,7 +104,7 @@ class Wind : Object,Mappable {
     }
 }
 
-class Sys : Object,Mappable {
+class System : Object,Mappable {
     dynamic var sunrise: Double = Constants.ZERO_VALUE
     dynamic var sunset: Double = Constants.ZERO_VALUE
     

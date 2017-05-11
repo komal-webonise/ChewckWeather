@@ -17,40 +17,41 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     let TEMPERATURE_CONVERTER = 273.15
     
+    //MARK: View Cycle Method
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
-        print(defaults?.value(forKey: UserDefaultsKeys.PLACE) ?? DefaultValues.DEFAULT_PLACE)
         
         weatherViewModel.webServiceCallForWeatherModel {
             self.labelCityTemperature.text = String(Int(self.weatherViewModel.weatherModel.main.temp - self.TEMPERATURE_CONVERTER)) + SpecialCharacters.DEGREE_SIGN
         }
         
-        //looks up for place name as per the place I
-        let place  = defaults?.value(forKey: UserDefaultsKeys.PLACE) as? String ?? DefaultValues.DEFAULT_PLACE
+        //looks up for place name as per the place id in userdefaults
+        let place  = defaults?.value(forKey: UserDefaultsKeys.PLACE) as? String ??          DefaultValues.DEFAULT_PLACE
+        
         labelCity.text = place
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    /// Perform any setup necessary in order to update the view.
+    ///
+    /// - Parameter completionHandler: completion handler to update the result
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
         
         //looks up for place name as per the place Id
         let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
         let place  = defaults?.value(forKey: UserDefaultsKeys.PLACE) as? String ?? DefaultValues.DEFAULT_PLACE
+        
         labelCity.text = place
         
         weatherViewModel.webServiceCallForWeatherModel {
             self.labelCityTemperature.text = String(Int(self.weatherViewModel.weatherModel.main.temp - self.TEMPERATURE_CONVERTER)) + SpecialCharacters.DEGREE_SIGN
         }
+        
         completionHandler(NCUpdateResult.newData)
     }
 }

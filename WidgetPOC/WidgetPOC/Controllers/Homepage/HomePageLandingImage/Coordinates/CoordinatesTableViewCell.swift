@@ -41,7 +41,7 @@ class CoordinatesTableViewCell: UITableViewCell {
             longitude: weatherModel.coord.lon)
         
         //Get sunset display time with timeZone got from coordinates
-        let sunset =  Date(timeIntervalSince1970: weatherModel.sys.sunset as TimeInterval).getTime(withTimeZone: timeZone)
+        let sunset =  Date(timeIntervalSince1970: weatherModel.system.sunset as TimeInterval).getTime(withTimeZone: timeZone)
         
         return sunset
     }
@@ -56,7 +56,7 @@ class CoordinatesTableViewCell: UITableViewCell {
             longitude: weatherModel.coord.lon)
         
         //Get sunrise display time with timeZone got from coordinates
-        let sunrise =  Date(timeIntervalSince1970: weatherModel.sys.sunrise as TimeInterval).getTime(withTimeZone: timeZone)
+        let sunrise =  Date(timeIntervalSince1970: weatherModel.system.sunrise as TimeInterval).getTime(withTimeZone: timeZone)
         
         return sunrise
     }

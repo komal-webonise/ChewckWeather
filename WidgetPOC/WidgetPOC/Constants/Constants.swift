@@ -16,12 +16,13 @@ typealias UserDefaultsKeys = Constants.UserDefaultsKeys
 typealias DefaultValues = Constants.DefaultValues
 typealias ButtonBorderAttributes = Constants.ButtonBorderAttributes
 typealias GooglePlacesKey = Constants.GooglePlacesKey
-
+typealias ParameterValues = Constants.ParameterValues
 class Constants {
     
     static let ZERO_VALUE = 0.0
     static let GROUP_SUITE_NAME = "group.WidgetPOCGroup"
     static let EMPTY_STRING = ""
+    static let URL = "http://api.openweathermap.org/data/2.5/weather"
     
     struct ViewControllersIds {
         static let SEARCH_PLACE_VC = "SearchPlaceVC"
@@ -91,5 +92,11 @@ class Constants {
     
     struct GooglePlacesKey {
         static let API_KEY = "AIzaSyAlMM_NIqG1bLYvmnpion_SnaWe4wE2rX4"
+    }
+    
+    struct ParameterValues {
+        static let QUERY = "q"
+        static let APP_ID = "appid"
+        static let APP_ID_VALUE = "82d42d1bbaa0bbec840a96ca44a1660d"
     }
 }

@@ -12,10 +12,10 @@ class WeatherViewModel {
     /// - Parameter completionBlock: completion block to be executed
     func webServiceCallForWeatherModel(completionBlock: @escaping (()->())) {
         //Access the userdefaults group which is shared between the application and today widget
-        let defaults = UserDefaults(suiteName: "group.WidgetPOCGroup")
+        let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
         
         //access the city variable from that group
-        let city = defaults?.value(forKey: "data") ?? "Pune"
+        let city = defaults?.value(forKey: UserDefaultsKeys.PLACE) ?? DefaultValues.DEFAULT_PLACE
         
         ModelApiUtilityInstance.callWeatherWebService(city: city as! String) { (weatherModel) in
             self.weatherModel = weatherModel ?? WeatherModel()
