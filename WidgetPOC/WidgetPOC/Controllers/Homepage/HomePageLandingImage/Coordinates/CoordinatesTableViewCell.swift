@@ -15,10 +15,6 @@ class CoordinatesTableViewCell: UITableViewCell {
     
     static let NIB_NAME = "CoordinatesTableViewCell"
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     /// Setup the cell label values
     ///
     /// - Parameter weatherModel: weather model from which the values are to be represented
@@ -28,10 +24,10 @@ class CoordinatesTableViewCell: UITableViewCell {
         labelLatTitle.text = isSunTimings ? LabelTitles.SUNRISE : LabelTitles.LATITUDE
         labelLongTitle.text = isSunTimings ? LabelTitles.SUNSET : LabelTitles.LONGITUDE
         labelLatitude.text = isSunTimings ?
-                             getSunrise(weatherModel: weatherModel) :
+                             getSunriseTime(weatherModel: weatherModel) :
                              String(weatherModel.coord.lat) + SpecialCharacters.DEGREE_SIGN
         labelLongitude.text = isSunTimings ?
-                              getSunset(weatherModel: weatherModel) :
+                              getSunsetTime(weatherModel: weatherModel) :
                               String(weatherModel.coord.lon)  + SpecialCharacters.DEGREE_SIGN
     }
     
@@ -39,7 +35,7 @@ class CoordinatesTableViewCell: UITableViewCell {
     ///
     /// - Parameter weatherModel: weather model
     /// - Returns: returns sunset
-    func getSunset(weatherModel: WeatherModel) -> String {
+    func getSunsetTime(weatherModel: WeatherModel) -> String {
         let timeZone = Date.getTimeZoneByCoordinate(
             lattitude: weatherModel.coord.lat,
             longitude: weatherModel.coord.lon)
@@ -54,7 +50,7 @@ class CoordinatesTableViewCell: UITableViewCell {
     ///
     /// - Parameter weatherModel: weather model
     /// - Returns: returns sunset
-    func getSunrise(weatherModel: WeatherModel) -> String {
+    func getSunriseTime(weatherModel: WeatherModel) -> String {
         let timeZone = Date.getTimeZoneByCoordinate(
             lattitude: weatherModel.coord.lat,
             longitude: weatherModel.coord.lon)

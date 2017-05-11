@@ -14,17 +14,13 @@ class WeatherDetailsTableViewCell: UITableViewCell {
     
     static let NIB_NAME = "WeatherDetailsTableViewCell"
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
     /// Setup the cell label values
     ///
     /// - Parameter weatherModel: weather model from which the values are to be represented
     func setup(weatherModel: WeatherModel) {
         labelHumidity.text = String(weatherModel.main.humidity) + SpecialCharacters.WHITESPACE
                              + SpecialCharacters.PERCENT
-        labelPressure.text = String(weatherModel.main.pressure) + SpecialCharacters.WHITESPACE       + SpecialCharacters.PRESSURE_UNIT
+        labelPressure.text = String(weatherModel.main.pressure) + SpecialCharacters.WHITESPACE          + SpecialCharacters.PRESSURE_UNIT
         labelWindSpeed.text = SpecialCharacters.WIND_SPEED_INITIAL +
                               String(weatherModel.wind.speed) +
                               SpecialCharacters.WHITESPACE +

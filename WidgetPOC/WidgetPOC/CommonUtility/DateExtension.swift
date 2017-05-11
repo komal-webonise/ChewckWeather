@@ -32,21 +32,21 @@ extension Date {
     /// - Parameter receivedDate: notification received date
     /// - Returns: String date to display
     func getTime(withTimeZone: TimeZone) -> String {
-        var dateString = ""
+        var dateString = Constants.EMPTY_STRING
         
-        if  let dateTime = self.getDateAsString(dateFormat: DateFormatters.DATE_FORMAT_DD_MM_YY_HH_MM_AM_PM,
-                                                timeZone: withTimeZone) {
+        if  let dateTime = self.getDateAsString(dateFormat:
+            DateFormatters.DATE_FORMAT_DD_MM_YY_HH_MM_AM_PM,
+            timeZone: withTimeZone) {
             
-            let dateTimeSplits: [String]! = dateTime.components(separatedBy: " ")
+            let dateTimeSplits: [String]! = dateTime.components(separatedBy: SpecialCharacters.WHITESPACE)
             
             if dateTimeSplits.count > 2 {
                 
                 let time = (dateTimeSplits[1])
                 let AM_PM = (dateTimeSplits[2])
-                dateString =  time + " " + AM_PM
+                dateString =  time + SpecialCharacters.WHITESPACE + AM_PM
             }
         }
-        
         return dateString
     }
     
@@ -63,5 +63,4 @@ extension Date {
         
         return timeZone!
     }
-    
 }

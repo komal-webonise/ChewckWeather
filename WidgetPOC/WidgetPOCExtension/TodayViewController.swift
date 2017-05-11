@@ -9,12 +9,12 @@ import Alamofire
 import GooglePlaces
 
 class TodayViewController: UIViewController, NCWidgetProviding {
-    //http://api.openweathermap.org/data/2.5/weather?q=pune&appid=82d42d1bbaa0bbec840a96ca44a1660d
     
     @IBOutlet weak var labelCityTemperature: UILabel!
-    
     @IBOutlet weak var labelCity: UILabel!
+    
     var weatherViewModel = WeatherViewModel()
+    
     let TEMPERATURE_CONVERTER = 273.15
     
     override func viewDidLoad() {
@@ -53,8 +53,4 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         completionHandler(NCUpdateResult.newData)
     }
-    
-    
-    
-    
 }

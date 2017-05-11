@@ -14,10 +14,14 @@ typealias LabelTitles = Constants.LabelTitles
 typealias DateFormatters = Constants.DateFormatters
 typealias UserDefaultsKeys = Constants.UserDefaultsKeys
 typealias DefaultValues = Constants.DefaultValues
+typealias ButtonBorderAttributes = Constants.ButtonBorderAttributes
+typealias GooglePlacesKey = Constants.GooglePlacesKey
+
 class Constants {
     
     static let ZERO_VALUE = 0.0
     static let GROUP_SUITE_NAME = "group.WidgetPOCGroup"
+    static let EMPTY_STRING = ""
     
     struct ViewControllersIds {
         static let SEARCH_PLACE_VC = "SearchPlaceVC"
@@ -78,5 +82,14 @@ class Constants {
     struct DefaultValues {
         static let DEFAULT_PLACE_ID = "ChIJARFGZy6_wjsRQ-Oenb9DjYI"
         static let DEFAULT_PLACE = "Pune"
+    }
+    
+    struct ButtonBorderAttributes {
+        static let CORNER_RADIUS: CGFloat = 5
+        static let BORDER_WIDTH: CGFloat = 1
+    }
+    
+    struct GooglePlacesKey {
+        static let API_KEY = "AIzaSyAlMM_NIqG1bLYvmnpion_SnaWe4wE2rX4"
     }
 }

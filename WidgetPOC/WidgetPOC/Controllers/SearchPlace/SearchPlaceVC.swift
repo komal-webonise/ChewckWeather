@@ -27,10 +27,11 @@ class SearchPlaceVC: UIViewController {
     var noOfRows = 1
     var arrayCityResults = [String]()
     var arrayCitiesPlaceId = [String]()
-    var lastLocation: CLLocation?
+    var firstLocation: CLLocation?
     static var selectedPlaceId = ""
     
     let ESTIMATED_ROW_HEIGHT: CGFloat = 100
+    let CITY: NSString = "City"
     let locationManager = CLLocationManager()
     
     //MARK: View cycle methods
@@ -88,10 +89,7 @@ extension SearchPlaceVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // let cell = tableView.cellForRow(at: indexPath) as! SearchPlaceTableViewCell
-
-       // SearchPlaceVC.selectedPlaceId = arrayCitiesPlaceId[indexPath.row]
-        
+        // Store the place id of selected city in userdefaults
         let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
         defaults?.set(arrayCitiesPlaceId[indexPath.row], forKey: UserDefaultsKeys.PLACE_ID)
         defaults?.synchronize()
@@ -111,6 +109,7 @@ extension SearchPlaceVC: UITableViewDelegate, UITableViewDataSource {
 
 //MARK: Search bar delegate
 extension SearchPlaceVC: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let placeClient = GMSPlacesClient()
         let filter = GMSAutocompleteFilter()
@@ -123,7 +122,6 @@ extension SearchPlaceVC: UISearchBarDelegate {
             
             //Checks if the result is nil and removes all the elements in the city names and reloads table View
             if results == nil{
-                print("blank")
                 self.arrayCityResults.removeAll()
                 self.arrayCitiesPlaceId.removeAll()
                 self.tableViewSearchResults.reloadData()
@@ -143,7 +141,6 @@ extension SearchPlaceVC: UISearchBarDelegate {
             }
         }
     }
-    
 }
 
 //MARK: Location manager delegate
@@ -156,24 +153,24 @@ extension SearchPlaceVC: CLLocationManagerDelegate {
     }
     
    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.first != nil {
-            print("location:: \(locations)")
-        }
-    guard let lastLocation = locations.first else { return }
+    if locations.first != nil {
+        print("location:: \(locations)")
+    }
     
-    self.lastLocation = lastLocation
+    guard let firstLocation = locations.first else { return }
+    
+    self.firstLocation = firstLocation
     
     let geoCoder = CLGeocoder()
-    
-    geoCoder.reverseGeocodeLocation(lastLocation) { (arrayPlacemarks, error) in
+    //Makes reverse coding mapping to get the city name
+    geoCoder.reverseGeocodeLocation(firstLocation) { (arrayPlacemarks, error) in
         if let arrayPlacemarks = arrayPlacemarks as [CLPlacemark]! {
             let placeMark: CLPlacemark = arrayPlacemarks[0]
-            if let city = placeMark.addressDictionary?["City"] as? NSString {
+            if let city = placeMark.addressDictionary?[self.CITY] as? NSString {
                 print(city)
             }
         }
     }
-    //stop updating location
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

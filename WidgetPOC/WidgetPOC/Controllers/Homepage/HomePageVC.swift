@@ -18,6 +18,7 @@ class HomePageVC: UIViewController {
     
     let ESTIMATED_ROW_HEIGHT: CGFloat = 100
     let TABLE_VIEW_HEADER_HEIGHT: CGFloat = 44
+    let NO_OF_ROWS = 4
     
     enum HomePageCells: Int {
         case landingImage = 0
@@ -52,17 +53,11 @@ class HomePageVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    //initial ui setup
+    ///initial ui setup
     func initialUISetup() {
         registerNibs()
         tableViewMainPage.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
-        
-        weatherViewModel.webServiceCallForWeatherModel {
-            self.tableViewMainPage.delegate = self
-            self.tableViewMainPage.dataSource = self
-            self.tableViewMainPage.reloadData()
-            self.labelCityTime.text = self.getTime()
-        }
+        self.callWeatherWebservice()
     }
     
     /// Registers nibs for the table view
@@ -85,12 +80,17 @@ class HomePageVC: UIViewController {
             let defaults = UserDefaults(suiteName: Constants.GROUP_SUITE_NAME)
             defaults?.set(data, forKey: UserDefaultsKeys.PLACE)
             defaults?.synchronize()
-            self.weatherViewModel.webServiceCallForWeatherModel {
-                self.tableViewMainPage.delegate = self
-                self.tableViewMainPage.dataSource = self
-                self.tableViewMainPage.reloadData()
-                self.labelCityTime.text = self.getTime()
-            }
+            self.callWeatherWebservice()
+        }
+    }
+    
+    /// Calls webservice for weather model
+    func callWeatherWebservice() {
+        self.weatherViewModel.webServiceCallForWeatherModel {
+            self.tableViewMainPage.delegate = self
+            self.tableViewMainPage.dataSource = self
+            self.tableViewMainPage.reloadData()
+            self.labelCityTime.text = self.getTimeOfCity()
         }
     }
 
@@ -103,21 +103,19 @@ class HomePageVC: UIViewController {
     /// Gets sunset display time with timeZone got from coordinates
     ///
     /// - Returns: returns sunset
-    func getTime() -> String {
+    func getTimeOfCity() -> String {
         let timeZone = Date.getTimeZoneByCoordinate(
             lattitude: weatherViewModel.weatherModel.coord.lat,
             longitude: weatherViewModel.weatherModel.coord.lon)
         
         //Get current time display according to time zone
-        
         let date = Date()
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = DateFormatters.DATE_FORMAT_HH_MM
         dateFormatter.timeZone = timeZone
         
         let time = dateFormatter.string(from: date)
-        
         return time
     }
 }
@@ -141,11 +139,11 @@ extension HomePageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return NO_OF_ROWS
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return  indexPath.row == 0 ?
+        return  indexPath.row == HomePageCells.landingImage.rawValue ?
         (self.view.frame.size.height - TABLE_VIEW_HEADER_HEIGHT ) :
         UITableViewAutomaticDimension
     }
@@ -178,7 +176,7 @@ extension HomePageVC: UITableViewDelegate, UITableViewDataSource {
         return weatherDetailsTableViewCell
     }
     
-    /// Setups cell for displaying coordinates
+    /// Setups cell for displaying coordinates or suntimings
     ///
     /// - Parameters:
     ///   - tableView: tableview on which cell is to be setup
@@ -193,7 +191,6 @@ extension HomePageVC: UITableViewDelegate, UITableViewDataSource {
         
         return coordinatesTableViewCell
     }
-    
 }
 
 //Google photo finder according to place name
@@ -215,7 +212,9 @@ extension HomePageVC {
         }
     }
     
-    //loads meta data of photos for the place
+    /// loads meta data of photos for the place
+    ///
+    /// - Parameter photoMetadata: meta data of place image
     func loadImageForMetadata(photoMetadata: GMSPlacePhotoMetadata) {
         GMSPlacesClient.shared().loadPlacePhoto(photoMetadata, callback: {
             (photo, error) -> Void in

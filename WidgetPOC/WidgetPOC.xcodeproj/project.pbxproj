@@ -44,7 +44,6 @@
 		F4A39C7E1EAEE9B40024288B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4A39C7C1EAEE9B40024288B /* MainInterface.storyboard */; };
 		F4A39C821EAEE9B40024288B /* WidgetPOCExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F4A39C751EAEE9B40024288B /* WidgetPOCExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4AD9ADF1EB9138400F92E69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD9ADE1EB9138400F92E69 /* AppDelegate.swift */; };
-		F4AD9AE21EB913FE00F92E69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD9AE11EB913FE00F92E69 /* ViewController.swift */; };
 		F4AD9AE71EB9147100F92E69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4AD9AE41EB9147100F92E69 /* Assets.xcassets */; };
 		F4AD9AE81EB9147100F92E69 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4AD9AE51EB9147100F92E69 /* Info.plist */; };
 		F4AD9AEE1EB9154C00F92E69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4AD9AEA1EB9154C00F92E69 /* LaunchScreen.storyboard */; };
@@ -112,7 +111,6 @@
 		F4A39C7F1EAEE9B40024288B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4A39C881EAEECFD0024288B /* WidgetPOCExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetPOCExtension.entitlements; sourceTree = "<group>"; };
 		F4AD9ADE1EB9138400F92E69 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = CommonFiles/AppDelegate.swift; sourceTree = "<group>"; };
-		F4AD9AE11EB913FE00F92E69 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
 		F4AD9AE41EB9147100F92E69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = SupportingFiles/Assets.xcassets; sourceTree = "<group>"; };
 		F4AD9AE51EB9147100F92E69 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SupportingFiles/Info.plist; sourceTree = "<group>"; };
 		F4AD9AEB1EB9154C00F92E69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Views/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 			children = (
 				F47E566E1EBA8B8400A85502 /* HomePage */,
 				F4AD9AF11EB9233800F92E69 /* SearchPlace */,
-				F4AD9AE11EB913FE00F92E69 /* ViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -540,7 +537,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F41AF9371EBD7D3300812273 /* UIUtility.swift in Sources */,
-				F4AD9AE21EB913FE00F92E69 /* ViewController.swift in Sources */,
 				F47D27B41EBBF684002F2144 /* WeatherViewModel.swift in Sources */,
 				F47D27B61EBBF689002F2144 /* ModelParserUtility.swift in Sources */,
 				F47D27C71EBC2443002F2144 /* CoordinatesTableViewCell.swift in Sources */,

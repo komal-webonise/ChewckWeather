@@ -13,11 +13,15 @@ class GooglePlaceUtility {
     /// - Parameter placeId: place id for the place
     /// - Returns: returns place name
     static func lookUpPlaceNameUsing(placeId: String, completionBlock: @escaping((_ placeFound: String) -> ())) {
-        var placeName = ""
+        var placeName = Constants.EMPTY_STRING
          
         let placeClient = GMSPlacesClient()
+        
+        //Filters city name
         let filter = GMSAutocompleteFilter()
         filter.type = .city
+        
+        //looks up for place name using place id
         placeClient.lookUpPlaceID(placeId, callback: { (place, error) -> Void in
             if let error = error {
                 print("lookup place id query error: \(error.localizedDescription)")
@@ -28,10 +32,9 @@ class GooglePlaceUtility {
                 print("No place details for \(placeId)")
                 return
             }
+            
             placeName = place.name
-            print("Place name \(place.name)")
             completionBlock(place.name)
         })
-        //return placeName
     }
 }
